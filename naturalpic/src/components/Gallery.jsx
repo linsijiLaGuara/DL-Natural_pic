@@ -51,6 +51,8 @@ const Gallery = () => {
                   <IconHeart filled={liked.includes(item.id)} />
                 </button>
               </Card.Footer>
+              <br />
+              <span>{item.photographer}</span>
             </Card>
           </div>
         ))}
