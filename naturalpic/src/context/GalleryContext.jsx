@@ -1,14 +1,14 @@
-// En GalleryContext.js
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const PhotoContext = createContext();
 
 export const GalleryProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
+  const [liked, setLiked] = useState([]);
+
   const FetchPhoto = async () => {
     try {
-      const photoJson = await fetch("/photos.json"); // Cambia la ruta a la raíz del proyecto
+      const photoJson = await fetch("/photos.json");
       if (!photoJson.ok) {
         throw new Error(`Failed to fetch: ${photoJson.status}`);
       }
@@ -32,7 +32,7 @@ export const GalleryProvider = ({ children }) => {
   }, []);
 
   return (
-    <PhotoContext.Provider value={{ photos, setPhotos }}>
+    <PhotoContext.Provider value={{ photos, setPhotos, liked, setLiked }}>
       {children}
     </PhotoContext.Provider>
   );
