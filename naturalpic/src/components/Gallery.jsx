@@ -1,11 +1,11 @@
-// Gallery.js
+// En Gallery.js
 import React from "react";
 import { Card } from "react-bootstrap";
 import { usePhotoContext } from "../context/GalleryContext";
 import IconHeart from "./IconHeart";
 
 const Gallery = () => {
-  const { photos, setPhotos } = usePhotoContext();
+  const { photos, setPhotos, liked, setLiked } = usePhotoContext();
 
   const handleLike = (id) => {
     const updatedPhotos = photos.map((item) =>
@@ -13,6 +13,12 @@ const Gallery = () => {
     );
 
     setPhotos(updatedPhotos);
+
+    const updatedLiked = liked.includes(id)
+      ? liked.filter((likeId) => likeId !== id)
+      : [...liked, id];
+
+    setLiked(updatedLiked);
   };
 
   return (
@@ -36,13 +42,13 @@ const Gallery = () => {
                   onClick={() => handleLike(item.id)}
                   style={{
                     fontSize: "12px",
-                    color: item.liked ? "red" : "black",
+                    color: liked.includes(item.id) ? "red" : "black",
                     border: "none",
                     background: "transparent",
                     cursor: "pointer",
                   }}
                 >
-                  <IconHeart id={item.id} />
+                  <IconHeart filled={liked.includes(item.id)} />
                 </button>
               </Card.Footer>
             </Card>

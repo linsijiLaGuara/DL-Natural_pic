@@ -1,3 +1,4 @@
+// En GalleryContext.js
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const PhotoContext = createContext();
@@ -17,7 +18,7 @@ export const GalleryProvider = ({ children }) => {
       const photoData = photos.map((foto) => {
         return {
           ...foto,
-          following: false,
+          liked: false, // Asegúrate de agregar el estado liked aquí
         };
       });
 
